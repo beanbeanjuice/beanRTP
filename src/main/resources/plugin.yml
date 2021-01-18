@@ -1,0 +1,12 @@
+name: BeanRTP
+version: ${project.version}
+main: beanbeanjuice.beanrtp.BeanRTP
+api-version: 1.16
+load: STARTUP
+authors: [beanbeanjuice]
+description: Teleport you to a random, safe, location.
+
+commands:
+  rtp:
+    aliases: [randomtp]
+    description: This randomly teleports you. You can also use /rtp (name).
