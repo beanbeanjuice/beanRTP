@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="BeanRTP:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/BeanRTP_jar</output-path>
-    <root id="archive" name="BeanRTP.jar">
-      <element id="module-output" name="BeanRTP" />
-    </root>
-  </artifact>
-</component>
