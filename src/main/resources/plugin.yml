@@ -1,12 +1,12 @@
-name: BeanRTP
+name: beanRTP
 version: ${project.version}
-main: beanbeanjuice.beanrtp.BeanRTP
+main: com.github.beanbeanjuice.beanrtp.beanRTP
 api-version: 1.16
 load: STARTUP
-authors: [beanbeanjuice]
-description: Teleport you to a random, safe, location.
+authors: [ beanbeanjuice ]
+description: A random teleport plugin for spigot/paper.
+website: youtube.com/beanbeanjuice
 
 commands:
-  rtp:
-    aliases: [randomtp]
-    description: This randomly teleports you. You can also use /rtp (name).
+  testcommand:
+    description: Test
