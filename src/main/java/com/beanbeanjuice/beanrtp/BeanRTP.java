@@ -32,7 +32,8 @@ public final class BeanRTP extends JavaPlugin {
     @NotNull
     public static WorldSpawns getWorldSpawns() {
         return worldSpawns;
-      
+    }
+
     @NotNull
     public static Messages getMessages() {
         return messages;
