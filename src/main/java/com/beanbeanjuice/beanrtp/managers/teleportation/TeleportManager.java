@@ -71,9 +71,9 @@ public class TeleportManager {
 
         int spawnX = 0;
         int spawnZ = 0;
-        if (BeanRTP.getWorldSpawns().getWorldSpawnsConfig().getString("spawn-coords." + playerworld) != null) {
-            spawnX = BeanRTP.getWorldSpawns().getWorldSpawnsConfig().getInt("spawn-coords." + playerworld + ".spawn-x-coordinate");
-            spawnZ = BeanRTP.getWorldSpawns().getWorldSpawnsConfig().getInt("spawn-coords." + playerworld + ".spawn-z-coordinate");
+        if (BeanRTP.getWorldSpawns().getConfig().getString("spawn-coords." + playerworld) != null) {
+            spawnX = BeanRTP.getWorldSpawns().getConfig().getInt("spawn-coords." + playerworld + ".spawn-x-coordinate");
+            spawnZ = BeanRTP.getWorldSpawns().getConfig().getInt("spawn-coords." + playerworld + ".spawn-z-coordinate");
         }
         double newX = 0;
         double newZ = 0;
