@@ -1,5 +1,6 @@
 package com.beanbeanjuice.beanrtp;
 
+import com.beanbeanjuice.beanrtp.helpers.GeneralHelper;
 import com.beanbeanjuice.beanrtp.managers.filemanagers.WorldSpawns;
 import com.beanbeanjuice.beanrtp.managers.filemanagers.Messages;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -9,6 +10,7 @@ public final class BeanRTP extends JavaPlugin {
 
     private static WorldSpawns worldSpawns;
     private static Messages messages;
+    private static GeneralHelper generalHelper;
 
     @Override
     public void onEnable() {
@@ -19,7 +21,7 @@ public final class BeanRTP extends JavaPlugin {
         messages = new Messages(this);
         getLogger().fine("BeanRTP.jar has been enabled...");
         // Create a new TabCompletor
-        // Create a new GeneralHelper
+        generalHelper = new GeneralHelper(this);
         // create a new RTP Command
 
     }
@@ -37,5 +39,10 @@ public final class BeanRTP extends JavaPlugin {
     @NotNull
     public static Messages getMessages() {
         return messages;
+    }
+
+    @NotNull
+    public static GeneralHelper getGeneralHelper() {
+        return generalHelper;
     }
 }
