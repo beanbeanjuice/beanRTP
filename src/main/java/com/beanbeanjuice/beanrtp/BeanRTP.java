@@ -1,13 +1,18 @@
 package com.beanbeanjuice.beanrtp;
 
+import com.beanbeanjuice.beanrtp.managers.teleportation.TeleportCooldown;
+import com.beanbeanjuice.beanrtp.managers.teleportation.TeleportTimer;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class BeanRTP extends JavaPlugin {
 
+    private static TeleportCooldown teleportCooldown;
+    private static TeleportTimer teleportTimer;
+
     @Override
     public void onEnable() {
-        // Setup Teleport Cooldown
-        // Setup Teleport Timer
+        teleportCooldown = new TeleportCooldown();
+        teleportTimer = new TeleportTimer();
         saveDefaultConfig();
         // Setup WorldSpawns
         // Setup Messages and create the config
@@ -21,5 +26,13 @@ public final class BeanRTP extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+    }
+
+    public static TeleportCooldown getTeleportCooldown() {
+        return teleportCooldown;
+    }
+
+    public static TeleportTimer getTeleportTimer() {
+        return teleportTimer;
     }
 }

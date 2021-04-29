@@ -1,6 +1,7 @@
 package com.beanbeanjuice.beanrtp.managers.teleportation;
 
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -26,7 +27,7 @@ public class TeleportCooldown {
      * @param player The {@link Player} to set the cooldown for.
      * @param seconds The length of the cooldown.
      */
-    public void setCooldown(Player player, int seconds) {
+    public void setCooldown(@NotNull Player player, @NotNull Integer seconds) {
         double delay = System.currentTimeMillis() + (seconds*1000);
         cooldowns.put(player.getUniqueId(), delay);
     }
@@ -36,7 +37,8 @@ public class TeleportCooldown {
      * @param player The {@link Player} to get the cooldown for.
      * @return The remaining time in seconds for the cooldown.
      */
-    public int getCooldown(Player player) {
+    @NotNull
+    public Integer getCooldown(@NotNull Player player) {
         return Math.toIntExact(Math.round((cooldowns.get(player.getUniqueId()) - (System.currentTimeMillis()))/1000));
     }
 
@@ -45,7 +47,8 @@ public class TeleportCooldown {
      * @param player The {@link Player} to check the cooldown for.
      * @return Whether or not the {@link Player} is still on cooldown.
      */
-    public boolean checkCooldown(Player player) {
+    @NotNull
+    public Boolean checkCooldown(@NotNull Player player) {
         return !cooldowns.containsKey(player.getUniqueId()) || cooldowns.get(player.getUniqueId()) <= System.currentTimeMillis();
     }
 
