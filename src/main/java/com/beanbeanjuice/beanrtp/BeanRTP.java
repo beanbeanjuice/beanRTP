@@ -1,5 +1,7 @@
 package com.beanbeanjuice.beanrtp;
 
+import com.beanbeanjuice.beanrtp.managers.teleportation.TeleportCooldown;
+import com.beanbeanjuice.beanrtp.managers.teleportation.TeleportTimer;
 import com.beanbeanjuice.beanrtp.helpers.GeneralHelper;
 import com.beanbeanjuice.beanrtp.managers.filemanagers.WorldSpawns;
 import com.beanbeanjuice.beanrtp.managers.filemanagers.Messages;
@@ -8,14 +10,16 @@ import org.jetbrains.annotations.NotNull;
 
 public final class BeanRTP extends JavaPlugin {
 
+    private static TeleportCooldown teleportCooldown;
+    private static TeleportTimer teleportTimer;
     private static WorldSpawns worldSpawns;
     private static Messages messages;
     private static GeneralHelper generalHelper;
 
     @Override
     public void onEnable() {
-        // Setup Teleport Cooldown
-        // Setup Teleport Timer
+        teleportCooldown = new TeleportCooldown();
+        teleportTimer = new TeleportTimer();
         saveDefaultConfig();
         worldSpawns = new WorldSpawns(this);
         messages = new Messages(this);
@@ -31,6 +35,16 @@ public final class BeanRTP extends JavaPlugin {
         // Plugin shutdown logic
     }
 
+    @NotNull
+    public static TeleportCooldown getTeleportCooldown() {
+        return teleportCooldown;
+    }
+
+    @NotNull
+    public static TeleportTimer getTeleportTimer() {
+        return teleportTimer;
+    }
+  
     @NotNull
     public static WorldSpawns getWorldSpawns() {
         return worldSpawns;
