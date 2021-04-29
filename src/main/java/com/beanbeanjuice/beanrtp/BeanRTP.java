@@ -1,12 +1,14 @@
 package com.beanbeanjuice.beanrtp;
 
 import com.beanbeanjuice.beanrtp.managers.filemanagers.WorldSpawns;
+import com.beanbeanjuice.beanrtp.managers.filemanagers.Messages;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 public final class BeanRTP extends JavaPlugin {
 
     private static WorldSpawns worldSpawns;
+    private static Messages messages;
 
     @Override
     public void onEnable() {
@@ -14,7 +16,7 @@ public final class BeanRTP extends JavaPlugin {
         // Setup Teleport Timer
         saveDefaultConfig();
         worldSpawns = new WorldSpawns(this);
-        // Setup Messages and create the config
+        messages = new Messages(this);
         getLogger().fine("BeanRTP.jar has been enabled...");
         // Create a new TabCompletor
         // Create a new GeneralHelper
@@ -28,7 +30,11 @@ public final class BeanRTP extends JavaPlugin {
     }
 
     @NotNull
-    public WorldSpawns getWorldSpawns() {
+    public static WorldSpawns getWorldSpawns() {
         return worldSpawns;
+      
+    @NotNull
+    public static Messages getMessages() {
+        return messages;
     }
 }
