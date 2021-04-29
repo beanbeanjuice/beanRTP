@@ -8,3 +8,8 @@ softdepend: [ PlaceholderAPI ]
 authors: [ beanbeanjuice ]
 description: A Random Teleport Plugin for Spigot
 website: https://www.beanbeanjuice.com
+
+commands:
+  rtp:
+    aliases: [randomtp]
+    description: Randomly teleports you. You can also use /rtp reload or /rtp (player name).
