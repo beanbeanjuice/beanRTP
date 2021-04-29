@@ -1,0 +1,10 @@
+name: BeanRTP
+version: @version@
+main: com.beanbeanjuice.beanrtp.BeanRTP
+api-version: 1.16
+prefix: beanRTP
+load: STARTUP
+softdepend: [ PlaceholderAPI ]
+authors: [ beanbeanjuice ]
+description: A Random Teleport Plugin for Spigot
+website: https://www.beanbeanjuice.com
