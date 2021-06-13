@@ -7,25 +7,26 @@ assignees: beanbeanjuice
 
 ---
 
-**Describe the bug**
+**__Describe the Bug__**
 A clear and concise description of what the bug is.
 
-**To Reproduce**
+**__Steps To Reproduce__**
 Steps to reproduce the behavior:
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
 4. See error
 
-**Expected behavior**
+**__Minecraft Information__**
+1. Pastebin Link of the Console Log
+2. Minecraft Version: e.g. 1.16.5
+3. Screenshot of All Plugins
+
+**__Expected Behavior__**
 A clear and concise description of what you expected to happen.
 
-**Screenshots/Videos**
+**__Screenshots/Videos__**
 If applicable, add screenshots or videos to help explain your problem. Links are preferred.
 
-**Minecraft Version (please complete the following information):**
- - Version: [e.g. 1.13, 1.15]
- - Type: [e.g. Vanilla, Spigot, Paperspigot, Bukkit]
-
-**Additional context**
+**__Additional Context__**
 Add any other context about the problem here.
