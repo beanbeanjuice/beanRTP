@@ -1,20 +1,23 @@
 package com.beanbeanjuice.beanrtp;
 
+import com.beanbeanjuice.beanrtp.commands.RandomTeleportCommand;
+import com.beanbeanjuice.beanrtp.managers.commands.CommandHandler;
+import com.beanbeanjuice.beanrtp.helpers.GeneralHelper;
+import com.beanbeanjuice.beanrtp.managers.filemanagers.Messages;
+import com.beanbeanjuice.beanrtp.managers.filemanagers.WorldSpawns;
 import com.beanbeanjuice.beanrtp.managers.teleportation.TeleportCooldown;
 import com.beanbeanjuice.beanrtp.managers.teleportation.TeleportTimer;
-import com.beanbeanjuice.beanrtp.helpers.GeneralHelper;
-import com.beanbeanjuice.beanrtp.managers.filemanagers.WorldSpawns;
-import com.beanbeanjuice.beanrtp.managers.filemanagers.Messages;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 public final class BeanRTP extends JavaPlugin {
 
+    private static GeneralHelper helper;
+    private static CommandHandler commandHandler;
     private static TeleportCooldown teleportCooldown;
     private static TeleportTimer teleportTimer;
     private static WorldSpawns worldSpawns;
     private static Messages messages;
-    private static GeneralHelper generalHelper;
 
     @Override
     public void onEnable() {
@@ -23,16 +26,28 @@ public final class BeanRTP extends JavaPlugin {
         saveDefaultConfig();
         worldSpawns = new WorldSpawns(this);
         messages = new Messages(this);
-        getLogger().fine("BeanRTP.jar has been enabled...");
-        // Create a new TabCompletor
-        generalHelper = new GeneralHelper(this);
-        // create a new RTP Command
+        helper = new GeneralHelper(this);
+        commandHandler = new CommandHandler(this);
+        getLogger().info("BeanRTP.jar has been enabled...");
+        commandHandler.addCommand(new RandomTeleportCommand());
 
+        // Initialize the commands after you have added all the commands.
+        commandHandler.initializeCommands();
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+    }
+
+    @NotNull
+    public static GeneralHelper getHelper() {
+        return helper;
+    }
+
+    @NotNull
+    public static CommandHandler getCommandHandler() {
+        return commandHandler;
     }
 
     @NotNull
@@ -44,7 +59,7 @@ public final class BeanRTP extends JavaPlugin {
     public static TeleportTimer getTeleportTimer() {
         return teleportTimer;
     }
-  
+
     @NotNull
     public static WorldSpawns getWorldSpawns() {
         return worldSpawns;
@@ -53,10 +68,5 @@ public final class BeanRTP extends JavaPlugin {
     @NotNull
     public static Messages getMessages() {
         return messages;
-    }
-
-    @NotNull
-    public static GeneralHelper getGeneralHelper() {
-        return generalHelper;
     }
 }

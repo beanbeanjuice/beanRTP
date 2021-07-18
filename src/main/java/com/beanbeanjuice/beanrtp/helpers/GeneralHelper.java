@@ -1,7 +1,10 @@
 package com.beanbeanjuice.beanrtp.helpers;
 
 import com.beanbeanjuice.beanrtp.BeanRTP;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 
 /**
  * A general helper class.
@@ -10,48 +13,101 @@ import org.jetbrains.annotations.NotNull;
  */
 public class GeneralHelper {
 
-    private BeanRTP plugin;
+    private final String prefix;
+    private final String noPermission;
+    private final BeanRTP plugin;
 
     /**
-     * Creates a new {@link GeneralHelper} object.
-     * @param plugin The current {@link BeanRTP} plugin.
+     * Create a new {@link GeneralHelper} object.
+     * @param plugin Returns the actual {@link org.bukkit.plugin.Plugin Plugin}.
      */
     public GeneralHelper(BeanRTP plugin) {
         this.plugin = plugin;
+        prefix = translateColors(plugin.getConfig().getString("prefix")) + " ";
+        noPermission = translateColors(plugin.getConfig().getString("no-permission"));
     }
 
     /**
-     * @return The current prefix for the {@link BeanRTP} plugin.
+     * Translate Minecraft color codes.
+     * @param string The {@link String} message you want to convert.
+     * @return The converted message {@link String}.
      */
-    @NotNull
-    public String getPrefix() {
-        return translateColors(plugin.getConfig().getString("prefix")) + " ";
-    }
-
-    /**
-     * Translates colors according to color code.
-     * @param string The {@link String} to be translated.
-     * @return The translated {@link String}.
-     */
-    @NotNull
-    public String translateColors(@NotNull String string) {
+    public String translateColors(String string) {
         return string.replaceAll("&", "§");
     }
 
     /**
-     * @return The current {@link BeanRTP} plugin.
+     * @return The current {@link org.bukkit.plugin.Plugin Plugin}.
      */
-    @NotNull
     public BeanRTP getPlugin() {
         return plugin;
     }
 
     /**
-     * @return The "No Permission" {@link String}.
+     * @return The current, parsed, prefix.
      */
-    @NotNull
+    public String getPrefix() {
+        return prefix;
+    }
+
+    /**
+     * @return The "no-permission" message from the config.
+     */
     public String getNoPermission() {
-        return translateColors(BeanRTP.getMessages().getConfig().getString("no-permission"));
+        return noPermission;
+    }
+
+    /**
+     * @param player The name of the {@link Player}.
+     * @return The "player-not-found" {@link String} in the config.
+     */
+    public String playerNotFound(String player) {
+        return getConfigString("player-not-found").replace("%player%", player);
+    }
+
+    /**
+     * Gets a particular, parsed, string from the main config.
+     * @param identifier The identifier used for YML files.
+     * @return The {@link String} message found in the config.
+     */
+    public String getConfigString(String identifier) {
+        return translateColors(plugin.getConfig().getString(identifier));
+    }
+
+    /**
+     * Gets a particular integer value from the main config.
+     * @param identifier The identifier used for YML files.
+     * @return The {@link Integer} found in the config.
+     */
+    public int getConfigInt(String identifier) {
+        return plugin.getConfig().getInt(identifier);
+    }
+
+    /**
+     * Gets a particular boolean value from the main config.
+     * @param identifier The identifier used for YML files.
+     * @return The {@link Boolean} found in the config.
+     */
+    public boolean getConfigBoolean(String identifier) {
+        return plugin.getConfig().getBoolean(identifier);
+    }
+
+    /**
+     * Gets a particular {@link ArrayList <String>} from the main config.
+     * @param identifier The identifier used for YML files.
+     * @return The {@link ArrayList<String>} found in the config.
+     */
+    public ArrayList<String> getConfigStringList(String identifier) {
+        ArrayList<String> arrayList = new ArrayList<>();
+
+        for (String string : plugin.getConfig().getStringList(identifier)) {
+            arrayList.add(translateColors(string));
+        }
+        return arrayList;
+    }
+
+    public boolean hasPermission(Player player, String permission) {
+        return player.hasPermission(permission);
     }
 
 }
