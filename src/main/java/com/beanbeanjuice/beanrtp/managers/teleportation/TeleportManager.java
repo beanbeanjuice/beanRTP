@@ -28,7 +28,7 @@ public class TeleportManager {
      */
     public TeleportManager(@NotNull Player player) {
         this.player = player;
-        plugin = BeanRTP.getGeneralHelper().getPlugin();
+        plugin = BeanRTP.getHelper().getPlugin();
     }
 
     /**
@@ -44,7 +44,7 @@ public class TeleportManager {
                 public void run() {
                     if (countdownTime[0] != -1) {
                         if (countdownTime[0] != 0) {
-                            player.sendTitle(BeanRTP.getGeneralHelper().getPrefix(), BeanRTP.getGeneralHelper().translateColors(BeanRTP.getMessages().getConfig().getString("starting-teleportation")).replace("{seconds}", Integer.toString((countdownTime[0]))), 0, 20, 20);
+                            player.sendTitle(BeanRTP.getHelper().getPrefix(), BeanRTP.getHelper().translateColors(BeanRTP.getMessages().getConfig().getString("starting-teleportation")).replace("{seconds}", Integer.toString((countdownTime[0]))), 0, 20, 20);
                             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 10, 1);
                             countdownTime[0]--;
                         } else {
@@ -95,10 +95,10 @@ public class TeleportManager {
         if (attempts != 100) {
             newLocation = new Location(world, newX + 0.5, newY + 2, newZ + 0.5);
             player.teleport(newLocation);
-            player.sendTitle(BeanRTP.getGeneralHelper().getPrefix().replace(" ", ""), BeanRTP.getGeneralHelper().translateColors(BeanRTP.getMessages().getConfig().getString("successful-teleportation")), 40, 45, 20);
+            player.sendTitle(BeanRTP.getHelper().getPrefix().replace(" ", ""), BeanRTP.getHelper().translateColors(BeanRTP.getMessages().getConfig().getString("successful-teleportation")), 40, 45, 20);
             BeanRTP.getTeleportCooldown().setCooldown(player, plugin.getConfig().getInt("cooldown-time"));
         } else {
-            player.sendMessage(BeanRTP.getGeneralHelper().getPrefix() + BeanRTP.getGeneralHelper().translateColors(BeanRTP.getMessages().getConfig().getString("unsuccessful-teleportation").replace("{player}", player.getName())));
+            player.sendMessage(BeanRTP.getHelper().getPrefix() + BeanRTP.getHelper().translateColors(BeanRTP.getMessages().getConfig().getString("unsuccessful-teleportation").replace("{player}", player.getName())));
         }
     }
 

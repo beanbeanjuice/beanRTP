@@ -1,15 +1,11 @@
 name: BeanRTP
-version: @version@
+version: 3.0.0-alpha
 main: com.beanbeanjuice.beanrtp.BeanRTP
-api-version: 1.16
+api-version: 1.17
 prefix: beanRTP
 load: STARTUP
-softdepend: [ PlaceholderAPI ]
-authors: [ beanbeanjuice ]
-description: A Random Teleport Plugin for Spigot
-website: https://www.beanbeanjuice.com
 
 commands:
-  rtp:
+  random-teleport:
     aliases: [randomtp]
     description: Randomly teleports you. You can also use /rtp reload or /rtp (player name).
