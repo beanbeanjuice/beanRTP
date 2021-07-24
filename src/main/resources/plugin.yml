@@ -7,5 +7,5 @@ load: STARTUP
 
 commands:
   random-teleport:
-    aliases: [randomtp]
+    aliases: [randomtp, rtp]
     description: Randomly teleports you. You can also use /rtp reload or /rtp (player name).

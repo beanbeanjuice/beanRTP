@@ -19,40 +19,39 @@ import java.util.Random;
  */
 public class TeleportManager {
 
-    private BeanRTP plugin;
-    private Player player;
+    private final BeanRTP plugin;
 
     /**
      * Creates a new {@link TeleportManager} object.
-     * @param player The {@link Player} to be teleported.
      */
-    public TeleportManager(@NotNull Player player) {
-        this.player = player;
+    public TeleportManager() {
         plugin = BeanRTP.getHelper().getPlugin();
     }
 
     /**
      * Teleports the {@link Player}.
      */
-    public void teleportPlayer() {
+    public void teleportPlayer(@NotNull Player player) {
         if (player.hasPermission("beanRTP.bypass.timer") || plugin.getConfig().getInt("countdown-time") == 0) {
-            teleportationSequence();
+            teleportationSequence(player);
         } else {
             BeanRTP.getTeleportTimer().setTimerCooldown(player, plugin.getConfig().getInt("countdown-time"));
-            final int[] countdownTime = {plugin.getConfig().getInt("countdown-time")};
-            plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
-                public void run() {
-                    if (countdownTime[0] != -1) {
-                        if (countdownTime[0] != 0) {
-                            player.sendTitle(BeanRTP.getHelper().getPrefix(), BeanRTP.getHelper().translateColors(BeanRTP.getMessages().getConfig().getString("starting-teleportation")).replace("{seconds}", Integer.toString((countdownTime[0]))), 0, 20, 20);
-                            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 10, 1);
-                            countdownTime[0]--;
-                        } else {
-                            teleportationSequence();
-                            applyEffects();
-                            countdownTime[0]--;
-                        }
+            plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
+
+                int countdownTime = plugin.getConfig().getInt("countdown-time");
+
+                if (countdownTime != -1) {
+                    if (countdownTime != 0) {
+                        player.sendTitle(BeanRTP.getHelper().getPrefix(),
+                                BeanRTP.getHelper().translateColors(
+                                        BeanRTP.getMessages().getConfig().getString("starting-teleportation")
+                                ).replace("{seconds}", Integer.toString((countdownTime))), 0, 20, 20);
+                        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 10, 1);
+                    } else {
+                        teleportationSequence(player);
+                        applyEffects(player);
                     }
+                    countdownTime--;
                 }
             }, 0L, 20L);
         }
@@ -61,7 +60,7 @@ public class TeleportManager {
     /**
      * Initiates the teleportation sequence.
      */
-    private void teleportationSequence() {
+    private void teleportationSequence(@NotNull Player player) {
         int attempts = 0;
         Location playerLocation = player.getLocation();
 
@@ -86,7 +85,7 @@ public class TeleportManager {
         while (search && attempts++ < 100) {
             newX = getRandomCoord(playerX, spawnX);
             newZ = getRandomCoord(playerZ, spawnZ);
-            newY = getTopBlock(newX, newZ);
+            newY = getTopBlock(player.getWorld(), newX, newZ);
 
             newLocation = new Location(world, newX, newY, newZ);
             search = !isSafe(newLocation, newY);
@@ -134,7 +133,7 @@ public class TeleportManager {
     private Boolean isSafe(@NotNull Location location, @NotNull Integer y) {
 
         // If the y value is below bedrock, then it is not safe.
-        // TODO: Update this for upcoming 1.17
+        // TODO: Update this for upcoming 1.18
         if (y == -1) {
             return false;
         }
@@ -175,20 +174,21 @@ public class TeleportManager {
     }
 
     /**
-     * @param x The x coord.
-     * @param z The y coord.
+     * @param currentWorld The current world of the {@link Player}.
+     * @param x The x coordinate.
+     * @param z The y coordinate.
      * @return The top coordinate for the provided x and z values.
      */
     @NotNull
-    private Integer getTopBlock(@NotNull Double x, @NotNull Double z) {
+    private Integer getTopBlock(@NotNull World currentWorld, @NotNull Double x, @NotNull Double z) {
         int y = -1;
         // TODO: This will need to change for the 1.17 update
         // Logic for Nether
-        if (isNether(player.getWorld())) {
+        if (isNether(currentWorld)) {
             int max = 120;
 
             for (int i = 0; i < max; i++) {
-                Location location = new Location(player.getWorld(), x, i, z);
+                Location location = new Location(currentWorld, x, i, z);
                 y = i-1;
                 if (location.getBlock().getType() == Material.AIR) {
                     break;
@@ -198,7 +198,7 @@ public class TeleportManager {
             int max = 256;
 
             for (int i = 0; i < max; i++) {
-                Location location = new Location(player.getWorld(), x, i, z);
+                Location location = new Location(currentWorld, x, i, z);
                 if (location.getBlock().getType() != Material.AIR) {
                     y = i;
                 }
@@ -209,8 +209,9 @@ public class TeleportManager {
 
     /**
      * Effects to apply after teleportation.
+     * @param player The {@link Player} to apply the effects to.
      */
-    private void applyEffects() {
+    private void applyEffects(@NotNull Player player) {
         if (isNether(player.getWorld())) {
             player.removePotionEffect(PotionEffectType.FIRE_RESISTANCE);
             player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 600, 0));

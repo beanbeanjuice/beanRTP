@@ -5,6 +5,7 @@ import com.beanbeanjuice.beanrtp.managers.commands.ICommand;
 import com.beanbeanjuice.beanrtp.managers.commands.Usage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ public class RandomTeleportCommand implements ICommand {
         }
 
         sender.sendMessage("It worked!");
+
+        BeanRTP.getTeleportManager().teleportPlayer((Player) sender);
         return true;
     }
 
@@ -30,9 +33,7 @@ public class RandomTeleportCommand implements ICommand {
     @Override
     public ArrayList<String> getPermissions() {
         ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("randomteleport");
-        arrayList.add("rtp");
-        arrayList.add("randomtp");
+        arrayList.add("beanrtp.");
         return arrayList;
     }
 
