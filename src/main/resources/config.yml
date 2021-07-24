@@ -3,6 +3,47 @@ prefix: '&8[&bbeanRTP&8]'
 # |||||||||||||||||||||||||||||||||||||||||||||
 # ---------------------------------------------
 
+# This is the maximum and minimum coord. This means that if you enter 1000, it will go from X = 1000 and Z = 1000
+# To X = -1000 and Z = -1000 (Relative to the spawn coord in that world.
+world-border-radius: 15000
+
+# Minimum distance to teleport from the player's current location.
+minimum-distance-from-player: 1000
+
+# Minimum distance to teleport from the set spawn location.
+minimum-distance-from-spawn: 1000
+
+# Allowed Worlds. This is case sensitive.
+allowed-worlds:
+  - world
+  - world_nether
+  - world_the_end
+  - factions
+  - factions_nether
+  - factions_the_end
+  - owners
+
+# List of worlds that are in the nether. If you want RTP to work in the nether, please add the nether worlds
+# To the allowed-worlds as well.
+nether-worlds:
+  - world_nether
+  - factions_nether
+
+# Cooldown in seconds.
+cooldown-time: 300
+
+# Countdown time in seconds.
+countdown-time: 10
+
+# Help commands
+help:
+  - '&6/rtp&a: Teleports you to a random location.'
+  - '&6/rtp (player)&a: Teleports the selected player to a random location.'
+  - '&6/rtp reload&a: Reloads the config file.'
+  - '&6/rtp setspawn&a: Sets the spawn location in config. You need this in order for the plugin to work properly.'
+  - '&6/rtp help&a: Displays these messages.'
+  - '&c&oNote&r&c: If you do not do /rtp setspawn in each world, it will use the default coordinates of X = 0 and Z = 0.'
+
 # Various Messages
 no-permission: '&cSorry, you do not have permission to execute this command.'
 player-not-found: '&cSorry, player &a%player% &cwas not found.'
