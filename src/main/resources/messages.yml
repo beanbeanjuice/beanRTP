@@ -21,3 +21,6 @@ help:
   - '&6/rtp setspawn&a: Sets the spawn location in config. You need this in order for the plugin to work properly.'
   - '&6/rtp help&a: Displays these messages.'
   - '&c&oNote&r&c: If you do not do /rtp setspawn in each world, it will use the default coordinates of X = 0 and Z = 0.'
+
+# DO NOT TOUCH THIS
+version: 1.0.0
