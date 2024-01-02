@@ -1,11 +1,14 @@
-name: BeanRTP
-version: 3.0.0-alpha
+name: beanRTP
+version: '${project.version}'
 main: com.beanbeanjuice.beanrtp.BeanRTP
-api-version: 1.17
+api-version: '1.20'
 prefix: beanRTP
-load: STARTUP
+softdepend: []
+authors: [beanbeanjuice]
+description: A random teleport plugin for Minecraft!
+website: https://www.github.com/beanbeanjuice/beanRTP
 
 commands:
-  random-teleport:
-    aliases: [randomtp, rtp]
-    description: Randomly teleports you. You can also use /rtp reload or /rtp (player name).
+  rtp:
+    aliases: [randomtp, randomteleport]
+    description: Randomly teleports you. You can also use /rtp (name).
