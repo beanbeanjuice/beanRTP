@@ -36,8 +36,9 @@ countdown-time: 10
 # beanRTP.bypass.cooldown - Bypasses the cooldown.
 # beanRTP.reload - Use of the /rtpreload command.
 # beanRTP.others - Use of the /rtp (name) command.
-# beanRTP.bypass.timer - Bypasses the timer
+# beanRTP.bypass.timer - Bypasses the timer.
 # beanRTP.setspawn - Sets the spawn in the config.
+# beanRTP.help - Access to the /rtp help command.
 
 # DO NOT TOUCH THIS
 version: 1.0.0

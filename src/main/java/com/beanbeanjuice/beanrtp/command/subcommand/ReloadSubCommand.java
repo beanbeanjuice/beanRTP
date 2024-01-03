@@ -2,24 +2,25 @@ package com.beanbeanjuice.beanrtp.command.subcommand;
 
 import com.beanbeanjuice.beanrtp.utility.Helper;
 import com.beanbeanjuice.beanrtp.utility.ISubCommand;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class TeleportOthersSubCommand implements ISubCommand {
+public class ReloadSubCommand implements ISubCommand {
 
     @Override
     public boolean handle(@NotNull CommandSender sender, @NotNull String[] args) {
-        Player player = Bukkit.getPlayer(args[0]);
+        if (args.length != 1) {
+            Helper.sendUnknownCommand(sender);
+            return false;
+        }
 
-        Helper.sendMessage(sender, "&c&lTeleporting other!");
+        Helper.sendMessage(sender, "Handling reload! WIP");
         return true;
     }
 
     @Override
     public String getPermission() {
-        return "beanRTP.others";
+        return "beanRTP.reload";
     }
 
 }
