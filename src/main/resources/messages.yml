@@ -10,10 +10,10 @@ spawn-set: '&3Spawn in &a{world} &3been set to &9{x}&3, &9{z}&3.'
 not-allowed-world: '&cSorry, you cannot do that in this world.'
 not-allowed-world-others: '&cSorry, {player} is in a disabled world.'
 unknown-player: '&cThe player &d{player} &cwas not found.'
-help-message: '&aDisplaying help commands...'
 already-teleporting: '&cYou cannot execute this command. You are already teleporting.'
 
 # Help commands
+help-message: '&aDisplaying help commands...'
 help:
   - '&6/rtp&a: Teleports you to a random location.'
   - '&6/rtp (player)&a: Teleports the selected player to a random location.'

@@ -8,11 +8,9 @@ import org.jetbrains.annotations.NotNull;
 public class Helper {
 
     private static String prefix;
-    private static String noPermission;
 
     public static void initialize(BeanRTP plugin) {
         prefix = translateColors(plugin.getConfig().getString("prefix"));
-        noPermission = translateColors(Messages.getConfig().getString("no-permission"));
     }
 
     @NotNull
@@ -29,8 +27,8 @@ public class Helper {
         return prefix;
     }
 
-    public static String getNoPermission() {
-        return noPermission;
+    public static void sendNoPermission(@NotNull CommandSender sender) {
+        sendMessage(sender, getMessageConfig("no-permission"));
     }
 
     public static void sendUnknownCommand(@NotNull CommandSender sender) {

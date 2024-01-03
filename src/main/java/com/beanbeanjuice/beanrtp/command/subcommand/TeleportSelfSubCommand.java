@@ -15,13 +15,18 @@ public class TeleportSelfSubCommand implements ISubCommand {
         return handlePlayer((Player) sender);
     }
 
+    @Override
+    public String getPermission() {
+        return "beanRTP.use";
+    }
+
     private boolean handleConsole(CommandSender sender) {
         Helper.sendUnknownCommand(sender);
         return true;
     }
 
     private boolean handlePlayer(Player player) {
-        Helper.sendMessage(player, "&c&l Teleporting self!");
+        Helper.sendMessage(player, "&c&lTeleporting self!");
         return true;
     }
 
