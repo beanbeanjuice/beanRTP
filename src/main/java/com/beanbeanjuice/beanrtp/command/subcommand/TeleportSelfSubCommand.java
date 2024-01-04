@@ -2,6 +2,7 @@ package com.beanbeanjuice.beanrtp.command.subcommand;
 
 import com.beanbeanjuice.beanrtp.utility.Helper;
 import com.beanbeanjuice.beanrtp.utility.ISubCommand;
+import com.beanbeanjuice.beanrtp.utility.teleportation.TeleportationManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -27,6 +28,8 @@ public class TeleportSelfSubCommand implements ISubCommand {
 
     private boolean handlePlayer(Player player) {
         Helper.sendMessage(player, "&c&lTeleporting self!");
+
+        TeleportationManager.teleport(player);
         return true;
     }
 
