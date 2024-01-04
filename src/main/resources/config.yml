@@ -1,29 +1,13 @@
 prefix: '&8[&bbeanRTP&8] '
 
-# This is the maximum and minimum coord. This means that if you enter 1000, it will go from X = 1000 and Z = 1000
-# To X = -1000 and Z = -1000 (Relative to the spawn coord in that world.
-world-border-radius: 15000
-
 # Minimum distance to teleport from the player's current location.
-minimum-distance-from-player: 1000
-
-# Minimum distance to teleport from the set spawn location.
-minimum-distance-from-spawn: 1000
+minimum-distance-from-border-center: 1000
 
 # Allowed Worlds. This is case-sensitive.
 allowed-worlds:
   - world
   - world_nether
   - world_the_end
-  - factions
-  - factions_nether
-  - factions_the_end
-
-# List of worlds that are in the nether. If you want RTP to work in the nether, please add the nether worlds
-# To the allowed-worlds as well.
-nether-worlds:
-  - world_nether
-  - factions_nether
 
 # Cooldown in seconds.
 cooldown-time: 300

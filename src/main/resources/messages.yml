@@ -13,8 +13,8 @@ unknown-player: '&cThe player &d{player} &cwas not found.'
 already-teleporting: '&cYou cannot execute this command. You are already teleporting.'
 
 # Help commands
-help-message: '&aDisplaying help commands...'
 help:
+  - '&aDisplaying help commands...'
   - '&6/rtp&a: Teleports you to a random location.'
   - '&6/rtp (player)&a: Teleports the selected player to a random location.'
   - '&6/rtp reload&a: Reloads the config file.'

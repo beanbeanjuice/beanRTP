@@ -6,15 +6,17 @@ import com.beanbeanjuice.beanrtp.utility.ISubCommand;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Displays the help command to the user.
+ *
+ * @author beanbeanjuice
+ * @since v3.0.0
+ */
 public class HelpSubCommand implements ISubCommand {
 
     @Override
     public boolean handle(@NotNull CommandSender sender, @NotNull String[] args) {
-        Helper.sendMessage(sender, Helper.getMessageConfig("help-message"));
-
-        Messages.getConfig()
-                .getStringList("help")
-                .forEach((string) -> Helper.sendMessage(sender, Helper.translateColors(string)));
+        Helper.sendMessage(sender, String.join("\n", Messages.getConfig().getStringList("help")));
         return true;
     }
 

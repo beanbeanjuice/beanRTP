@@ -4,6 +4,8 @@ import com.beanbeanjuice.beanrtp.command.RTPCommand;
 import com.beanbeanjuice.beanrtp.config.Messages;
 import com.beanbeanjuice.beanrtp.utility.CommandHandler;
 import com.beanbeanjuice.beanrtp.utility.Helper;
+import com.beanbeanjuice.beanrtp.utility.teleportation.TeleportationManager;
+import com.beanbeanjuice.beanrtp.utility.teleportation.TeleportationSettings;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class BeanRTP extends JavaPlugin {
@@ -14,6 +16,7 @@ public final class BeanRTP extends JavaPlugin {
         Messages.createConfig(this);
 
         Helper.initialize(this);
+        TeleportationManager.initialize(this);
         initializeCommands();
 
         getLogger().info("The plugin has been enabled.");
