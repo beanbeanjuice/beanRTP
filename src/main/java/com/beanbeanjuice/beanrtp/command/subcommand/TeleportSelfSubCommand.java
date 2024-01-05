@@ -27,10 +27,22 @@ public class TeleportSelfSubCommand implements ISubCommand {
     }
 
     private boolean handlePlayer(Player player) {
-        Helper.sendMessage(player, "&c&lTeleporting self!");
+        if (!canBypassCooldown(player) && TeleportationManager.getCooldownManager().isInCooldown(player)) {
+            int secondsLeft = TeleportationManager.getCooldownManager().getCooldownInSeconds(player);
+            Helper.sendMessage(player, Helper.getMessageConfig("cooldown").replace("{seconds}", String.valueOf(secondsLeft)));
+            return false;
+        }
 
-        TeleportationManager.teleport(player);
+        if (TeleportationManager.teleport(player)) {
+            TeleportationManager.getCooldownManager().addCooldown(player);
+            Helper.sendMessage(player, "&c&lTeleporting self!");
+            return true;
+        }
         return true;
+    }
+
+    private boolean canBypassCooldown(Player player) {
+        return player.isOp() || player.hasPermission("beanRTP.bypass.cooldown");
     }
 
 }

@@ -18,6 +18,7 @@ import java.util.Optional;
 
 public class RTPCommand implements CommandExecutor {
 
+    // TODO: Detect world border change event.
     private final BeanRTP plugin;
     private final HashMap<String, ISubCommand> subCommands = new HashMap<>() {{
         put("self", new TeleportSelfSubCommand());
