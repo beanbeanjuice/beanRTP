@@ -1,4 +1,5 @@
 ---
+
 name: Bug Report
 about: Create a bug report telling us exactly what is wrong.
 title: "[BUG] **DESCRIBE YOUR ISSUE AS SHORT AS POSSIBLE IN THIS BOX**"
@@ -7,26 +8,36 @@ assignees: beanbeanjuice
 
 ---
 
-**__Describe the Bug__**
+## Bug Description
 A clear and concise description of what the bug is.
 
-**__Steps To Reproduce__**
-Steps to reproduce the behavior:
+---
+
+## Steps to Reproduce the Bug
 1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+1. Click on '....'
+1. Scroll down to '....'
+1. See error
 
-**__Minecraft Information__**
-1. Pastebin Link of the Console Log
-2. Minecraft Version: e.g. 1.16.5
-3. Screenshot of All Plugins
+---
 
-**__Expected Behavior__**
+## Expected Behaviour
 A clear and concise description of what you expected to happen.
 
-**__Screenshots/Videos__**
+---
+
+## Screenshots/Videos
 If applicable, add screenshots or videos to help explain your problem. Links are preferred.
 
-**__Additional Context__**
+---
+
+## Additional Context
+
 Add any other context about the problem here.
+
+---
+
+## Checklist
+
+- [ ] I have checked for similar issues.
+- [ ] This is a bug report, not a feature request, improvement request, or security vulnerability report.
