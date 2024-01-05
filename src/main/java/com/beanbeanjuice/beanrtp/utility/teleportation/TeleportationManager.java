@@ -1,7 +1,6 @@
 package com.beanbeanjuice.beanrtp.utility.teleportation;
 
 import com.beanbeanjuice.beanrtp.BeanRTP;
-import com.beanbeanjuice.beanrtp.utility.Helper;
 import com.beanbeanjuice.beanrtp.utility.cooldown.CooldownManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -88,9 +87,9 @@ public class TeleportationManager {
                     locations.add(getNewLocation(world));
                     plugin.getLogger().log(
                             Level.INFO,
-                            "Adding RTP location for %s: %d/%d".formatted(
-                                    world.getName(), locations.size(), getMaxLocationsCount()
-                            )
+                            String.format("Adding RTP location for %s: %d/%d",
+                                        world.getName(), locations.size(), getMaxLocationsCount()
+                                    )
                     );
                 } catch (InterruptedException ignored) { }
             }
@@ -102,7 +101,7 @@ public class TeleportationManager {
 
         if (safeLocations.get(world).isEmpty()) return false;
 
-        Location location = safeLocations.get(world).removeFirst();
+        Location location = safeLocations.get(world).remove(0);
 
         // Used to stop console spam of "MOVED TOO QUICKLY"
         Bukkit.getScheduler().runTaskLater(
