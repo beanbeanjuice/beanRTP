@@ -5,7 +5,6 @@ import com.beanbeanjuice.beanrtp.config.Messages;
 import com.beanbeanjuice.beanrtp.utility.CommandHandler;
 import com.beanbeanjuice.beanrtp.utility.Helper;
 import com.beanbeanjuice.beanrtp.utility.teleportation.TeleportationManager;
-import com.beanbeanjuice.beanrtp.utility.teleportation.TeleportationSettings;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class BeanRTP extends JavaPlugin {
