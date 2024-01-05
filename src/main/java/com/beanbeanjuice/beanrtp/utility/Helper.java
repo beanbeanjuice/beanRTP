@@ -8,14 +8,22 @@ import org.jetbrains.annotations.NotNull;
 public class Helper {
 
     private static String prefix;
+    private static BeanRTP plugin;
 
-    public static void initialize(BeanRTP plugin) {
+    public static void initialize(BeanRTP beanRTP) {
+        plugin = beanRTP;
         prefix = translateColors(plugin.getConfig().getString("prefix"));
     }
 
     @NotNull
     public static String translateColors(@NotNull String string) {
         return string.replaceAll("&", "§");
+    }
+
+
+    @NotNull
+    public static BeanRTP getPlugin() {
+        return plugin;
     }
 
     @NotNull
