@@ -1,5 +1,6 @@
 package com.beanbeanjuice.beanrtp.command.subcommand;
 
+import com.beanbeanjuice.beanrtp.config.Messages;
 import com.beanbeanjuice.beanrtp.utility.Helper;
 import com.beanbeanjuice.beanrtp.utility.ISubCommand;
 import com.beanbeanjuice.beanrtp.utility.cooldown.CooldownManager;
@@ -7,8 +8,13 @@ import com.beanbeanjuice.beanrtp.utility.countdown.CountdownDisplay;
 import com.beanbeanjuice.beanrtp.utility.countdown.CountdownManager;
 import com.beanbeanjuice.beanrtp.utility.countdown.CountdownTimer;
 import com.beanbeanjuice.beanrtp.utility.teleportation.TeleportationManager;
+import org.bukkit.Bukkit;
+import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.Callable;
@@ -32,9 +38,6 @@ public class TeleportSelfSubCommand implements ISubCommand {
         return true;
     }
 
-    // TODO: Start countdown.
-    // TODO: Don't let player RTP again while in countdown.
-    // TODO: If player moves, stop countdown.
     private boolean handlePlayer(Player player) {
         if (!canBypassCooldown(player) && TeleportationManager.getCooldownManager().isInCooldown(player)) {
             int secondsLeft = TeleportationManager.getCooldownManager().getCooldownInSeconds(player);
@@ -45,19 +48,22 @@ public class TeleportSelfSubCommand implements ISubCommand {
         int countdownTime = Helper.getPlugin().getConfig().getInt("countdown-time");
 
         CountdownDisplay displayFunction = (timeLeft) -> {
-            Helper.sendMessage(player, "You have " + timeLeft + " seconds left.");
+            player.sendTitle(Helper.getPrefix(), Helper.getMessageConfig("starting-teleportation").replace("{seconds}", Integer.toString(timeLeft)), 0, 20, 20);
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 10, 1);
         };
 
         Callable<Void> completedFunction = () -> {
             if (TeleportationManager.teleport(player)) {
+                applyEffects(player);
                 TeleportationManager.getCooldownManager().addCooldown(player);
-                Helper.sendMessage(player, "&c&lTeleporting self!");
+                player.sendTitle(Helper.getPrefix(), Helper.getMessageConfig("successful-teleportation"), 0, 20, 20);
             }
             return null;
         };
 
         Callable<Void> failedFunction = () -> {
-            Helper.sendMessage(player, "You moved!");  // TODO: Custom message.
+            player.sendTitle(Helper.getPrefix(), Helper.getMessageConfig("moved-during-teleport"), 0, 20, 20);
+            player.playSound(player.getLocation(), Sound.ENTITY_GHAST_DEATH, 10, 1);
             return null;
         };
 
@@ -67,7 +73,7 @@ public class TeleportSelfSubCommand implements ISubCommand {
         );
 
         if (CountdownManager.isCounting(player)) {
-            Helper.sendMessage(player, "YOU ALREADY STARTED");  // TODO: Custom message
+            Helper.sendMessage(player, Helper.getMessageConfig("already-teleporting"));
             return false;
         }
 
@@ -75,6 +81,22 @@ public class TeleportSelfSubCommand implements ISubCommand {
         CountdownManager.addCountdown(player, timer).start(Helper.getPlugin());
 
         return true;
+    }
+
+    private void applyEffects(Player player) {
+        // Running 2 ticks later to prevent errors.
+        Bukkit.getScheduler().runTaskLater(Helper.getPlugin(), () -> {
+            player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_FLAP, 10, 1);
+            player.playSound(player.getLocation(), Sound.ENTITY_BAT_DEATH, 0.5F, 1);
+            if (player.getWorld().getEnvironment().equals(World.Environment.NETHER)) {
+                player.removePotionEffect(PotionEffectType.FIRE_RESISTANCE);
+                player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 600, 0));
+            }
+            player.removePotionEffect(PotionEffectType.SLOW_FALLING);
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 300, 0));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 40, 10));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 40, 10));
+        }, 2);
     }
 
     private boolean canBypassCooldown(Player player) {
