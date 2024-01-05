@@ -1,6 +1,7 @@
 package com.beanbeanjuice.beanrtp.utility.teleportation;
 
 import com.beanbeanjuice.beanrtp.BeanRTP;
+import com.beanbeanjuice.beanrtp.utility.Helper;
 import com.beanbeanjuice.beanrtp.utility.cooldown.CooldownManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -239,6 +240,10 @@ public class TeleportationManager {
         if (onlinePlayers == 0) return MAX_LOCATIONS_PER_PLAYER;
 
         return onlinePlayers * MAX_LOCATIONS_PER_PLAYER;
+    }
+
+    public static boolean inAllowedWorld(Player player) {
+        return safeLocations.containsKey(player.getWorld());
     }
 
     public static CooldownManager getCooldownManager() {

@@ -39,6 +39,11 @@ public class TeleportSelfSubCommand implements ISubCommand {
     }
 
     private boolean handlePlayer(Player player) {
+        if (!TeleportationManager.inAllowedWorld(player)) {
+            Helper.sendMessage(player, Helper.getMessageConfig("not-allowed-world"));
+            return false;
+        }
+
         if (!canBypassCooldown(player) && TeleportationManager.getCooldownManager().isInCooldown(player)) {
             int secondsLeft = TeleportationManager.getCooldownManager().getCooldownInSeconds(player);
             Helper.sendMessage(player, Helper.getMessageConfig("cooldown").replace("{seconds}", String.valueOf(secondsLeft)));
