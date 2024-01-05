@@ -15,6 +15,11 @@ public class TeleportOthersSubCommand implements ISubCommand {
     public boolean handle(@NotNull CommandSender sender, @NotNull String[] args) {
         Player player = Bukkit.getPlayer(args[0]);
 
+        if (!TeleportationManager.inAllowedWorld(player)) {
+            Helper.sendMessage(sender, Helper.getMessageConfig("not-allowed-world-others"));
+            return false;
+        }
+
         if (TeleportationManager.teleport(player))
             Helper.sendMessage(sender, Messages.getConfig().getString("other-successful-teleportation")
                     .replace("{player}", player.getName()));
