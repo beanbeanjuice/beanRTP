@@ -8,7 +8,6 @@ other-unsuccessful-teleportation: '&cThere was an error teleporting {player}. Pl
 cooldown: '&cSorry, you are on a cooldown for &b{seconds} &cmore seconds.'
 successful-reload: '&aThe plugin has been successfully reloaded.'
 unknown-command: '&cThis is an unknown command. Please type &a/rtp help &cfor more information.'
-spawn-set: '&3Spawn in &a{world} &3been set to &9{x}&3, &9{z}&3.'
 not-allowed-world: '&cSorry, you cannot do that in this world.'
 not-allowed-world-others: '&cSorry, {player} is in a disabled world.'
 unknown-player: '&cThe player &d{player} &cwas not found.'

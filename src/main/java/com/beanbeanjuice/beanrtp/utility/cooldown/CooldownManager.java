@@ -1,4 +1,4 @@
-package com.beanbeanjuice.beanrtp.utility;
+package com.beanbeanjuice.beanrtp.utility.cooldown;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

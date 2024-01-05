@@ -1,7 +1,7 @@
 package com.beanbeanjuice.beanrtp.utility.teleportation;
 
 import com.beanbeanjuice.beanrtp.BeanRTP;
-import com.beanbeanjuice.beanrtp.utility.CooldownManager;
+import com.beanbeanjuice.beanrtp.utility.cooldown.CooldownManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.jetbrains.annotations.NotNull;
 
-import java.time.Duration;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.stream.Stream;
