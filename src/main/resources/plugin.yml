@@ -7,6 +7,7 @@ softdepend: []
 authors: [beanbeanjuice]
 description: A random teleport plugin for Minecraft!
 website: https://www.github.com/beanbeanjuice/beanRTP
+load: POSTWORLD
 
 commands:
   rtp:
