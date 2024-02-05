@@ -11,6 +11,7 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.stream.Stream;
 
@@ -139,6 +140,8 @@ public class TeleportationManager {
             newLocation = new Location(worldBorderCenter.getWorld(), x, -256, z);
             newLocation = getTopBlock(newLocation);
             newLocation.add(0.5, 0.5, 0.5);
+
+            Thread.sleep(TimeUnit.SECONDS.toMillis(1));  // Prevent crashing.
         } while (worldBorderCenter.distance(newLocation) < settings.getMinimumDistanceFromBorderCenter() || !isSafe(newLocation));
 
         return newLocation.add(0, 0.5, 0);
