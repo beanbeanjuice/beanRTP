@@ -5,6 +5,7 @@ import com.beanbeanjuice.beanrtp.config.Messages;
 import com.beanbeanjuice.beanrtp.utility.CommandHandler;
 import com.beanbeanjuice.beanrtp.utility.Helper;
 import com.beanbeanjuice.beanrtp.utility.teleportation.TeleportationManager;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class BeanRTP extends JavaPlugin {
@@ -29,6 +30,7 @@ public final class BeanRTP extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        Bukkit.getScheduler().cancelTasks(this);  // TODO
         getLogger().info("The plugin has been disabled.");
     }
 
