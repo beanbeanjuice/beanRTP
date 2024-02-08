@@ -1,6 +1,7 @@
 package com.beanbeanjuice.beanrtp.utility.teleportation;
 
 import com.beanbeanjuice.beanrtp.BeanRTP;
+import com.beanbeanjuice.beanrtp.utility.Helper;
 import com.beanbeanjuice.beanrtp.utility.cooldown.CooldownManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -10,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.Time;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -21,8 +23,8 @@ public class TeleportationManager {
     private static TeleportationSettings settings;
     private static CooldownManager cooldownManager;
 
-    private static final int MAX_LOCATIONS_PER_PLAYER = 3;
-    private static final int MIN_LOCATIONS_PER_PLAYER = 1;
+    private static final int MAX_LOCATIONS_PER_PLAYER = 5;
+    private static final int MIN_LOCATIONS_PER_PLAYER = 2;
 
     private static final Material[] unsafeMaterials = new Material[] {
             Material.LAVA,
@@ -57,7 +59,7 @@ public class TeleportationManager {
             Material.TALL_GRASS
     };
 
-    private static HashMap<World, Vector<Location>> safeLocations = new HashMap<>();
+    private static Hashtable<World, Vector<Location>> safeLocations = new Hashtable<>();
 
     private TeleportationManager() { }
 
@@ -127,7 +129,12 @@ public class TeleportationManager {
         Location worldBorderCenter = world.getWorldBorder().getCenter();
         Location newLocation = world.getWorldBorder().getCenter();
 
+        long timerLong = System.currentTimeMillis();
+
         do {
+            if (System.currentTimeMillis() - timerLong < TimeUnit.SECONDS.toMillis(5)) continue;  // Prevent crashing.
+            timerLong = System.currentTimeMillis();
+
             int x1 = borders.getKey().getBlockX();
             int x2 = borders.getValue().getBlockX();
 
@@ -140,8 +147,6 @@ public class TeleportationManager {
             newLocation = new Location(worldBorderCenter.getWorld(), x, -256, z);
             newLocation = getTopBlock(newLocation);
             newLocation.add(0.5, 0.5, 0.5);
-
-            Thread.sleep(TimeUnit.SECONDS.toMillis(1));  // Prevent crashing.
         } while (worldBorderCenter.distance(newLocation) < settings.getMinimumDistanceFromBorderCenter() || !isSafe(newLocation));
 
         return newLocation.add(0, 0.5, 0);
