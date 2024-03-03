@@ -33,7 +33,8 @@ public class TeleportationManager {
             Material.SEAGRASS,
             Material.SEA_PICKLE,
             Material.FIRE,
-            Material.MAGMA_BLOCK
+            Material.MAGMA_BLOCK,
+            Material.POWDER_SNOW
     };
 
     private static final Material[] ignoredMaterials = new Material[] {
