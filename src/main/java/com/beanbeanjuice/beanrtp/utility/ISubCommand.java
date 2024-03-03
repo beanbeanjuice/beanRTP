@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 public interface ISubCommand {
 
-    boolean handle(@NotNull CommandSender sender, @NotNull String[] args);
+    boolean handle(CommandSender sender, String[] args);
     String getPermission();
 
 }

@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public class CountdownManager {
 
-    private static HashMap<UUID, CountdownTimer> countdowns = new HashMap<>();
+    private static final HashMap<UUID, CountdownTimer> countdowns = new HashMap<>();
 
     public static CountdownTimer addCountdown(Player player, CountdownTimer timer) {
         countdowns.put(player.getUniqueId(), timer);

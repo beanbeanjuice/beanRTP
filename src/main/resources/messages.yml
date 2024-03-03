@@ -24,4 +24,4 @@ help:
   - '&c&oNote&r&c: If you do not do /rtp setspawn in each world, it will use the default coordinates of X = 0 and Z = 0.'
 
 # DO NOT TOUCH THIS
-version: 1.0.0
+file-version: 1

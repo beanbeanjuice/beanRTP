@@ -1,19 +1,29 @@
 package com.beanbeanjuice.beanrtp;
 
 import com.beanbeanjuice.beanrtp.command.RTPCommand;
-import com.beanbeanjuice.beanrtp.config.Messages;
 import com.beanbeanjuice.beanrtp.utility.CommandHandler;
 import com.beanbeanjuice.beanrtp.utility.Helper;
+import com.beanbeanjuice.beanrtp.utility.config.Config;
+import com.beanbeanjuice.beanrtp.utility.config.MessageConfig;
+import com.beanbeanjuice.beanrtp.utility.config.PluginConfig;
 import com.beanbeanjuice.beanrtp.utility.teleportation.TeleportationManager;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
+@Getter
 public final class BeanRTP extends JavaPlugin {
+
+    private Config pluginConfig;
+    private Config messageConfig;
 
     @Override
     public void onEnable() {
-        saveDefaultConfig();
-        Messages.createConfig(this);
+        pluginConfig = new PluginConfig(this.getDataFolder());
+        messageConfig = new MessageConfig(this.getDataFolder());
+
+        pluginConfig.initialize();
+        messageConfig.initialize();
 
         Helper.initialize(this);
         TeleportationManager.initialize(this);
@@ -25,7 +35,7 @@ public final class BeanRTP extends JavaPlugin {
     private void initializeCommands() {
         CommandHandler handler = new CommandHandler(this);
 
-        handler.initializeCommand("rtp", new RTPCommand(this));
+        handler.initializeCommand("rtp", new RTPCommand());
     }
 
     @Override

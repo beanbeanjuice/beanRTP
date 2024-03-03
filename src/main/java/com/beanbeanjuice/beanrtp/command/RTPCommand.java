@@ -1,6 +1,5 @@
 package com.beanbeanjuice.beanrtp.command;
 
-import com.beanbeanjuice.beanrtp.BeanRTP;
 import com.beanbeanjuice.beanrtp.command.subcommand.HelpSubCommand;
 import com.beanbeanjuice.beanrtp.command.subcommand.ReloadSubCommand;
 import com.beanbeanjuice.beanrtp.command.subcommand.TeleportOthersSubCommand;
@@ -18,17 +17,12 @@ import java.util.Optional;
 public class RTPCommand implements CommandExecutor {
 
     // TODO: Detect world border change event.
-    private final BeanRTP plugin;
     private final HashMap<String, ISubCommand> subCommands = new HashMap<>() {{
         put("self", new TeleportSelfSubCommand());
         put("others", new TeleportOthersSubCommand());
         put("help", new HelpSubCommand());
         put("reload", new ReloadSubCommand());
     }};
-
-    public RTPCommand(BeanRTP plugin) {
-        this.plugin = plugin;
-    }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
