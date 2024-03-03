@@ -1,33 +1,16 @@
-prefix: '&8[&bbeanRTP&8]'
-# ---------------------------------------------
-# |||||||||||||||||||||||||||||||||||||||||||||
-# ---------------------------------------------
-
-# This is the maximum and minimum coord. This means that if you enter 1000, it will go from X = 1000 and Z = 1000
-# To X = -1000 and Z = -1000 (Relative to the spawn coord in that world.
-world-border-radius: 15000
+# =================================
+#             beanRTP
+# =================================
+prefix: '&8[&bbeanRTP&8] '
 
 # Minimum distance to teleport from the player's current location.
-minimum-distance-from-player: 1000
+minimum-distance-from-border-center: 1000
 
-# Minimum distance to teleport from the set spawn location.
-minimum-distance-from-spawn: 1000
-
-# Allowed Worlds. This is case sensitive.
+# Allowed Worlds. This is case-sensitive.
 allowed-worlds:
   - world
   - world_nether
   - world_the_end
-  - factions
-  - factions_nether
-  - factions_the_end
-  - owners
-
-# List of worlds that are in the nether. If you want RTP to work in the nether, please add the nether worlds
-# To the allowed-worlds as well.
-nether-worlds:
-  - world_nether
-  - factions_nether
 
 # Cooldown in seconds.
 cooldown-time: 300
@@ -35,25 +18,13 @@ cooldown-time: 300
 # Countdown time in seconds.
 countdown-time: 10
 
-# Help commands
-help:
-  - '&6/rtp&a: Teleports you to a random location.'
-  - '&6/rtp (player)&a: Teleports the selected player to a random location.'
-  - '&6/rtp reload&a: Reloads the config file.'
-  - '&6/rtp setspawn&a: Sets the spawn location in config. You need this in order for the plugin to work properly.'
-  - '&6/rtp help&a: Displays these messages.'
-  - '&c&oNote&r&c: If you do not do /rtp setspawn in each world, it will use the default coordinates of X = 0 and Z = 0.'
+# Permissions:
+# beanRTP.use - Use of the /rtp command.
+# beanRTP.bypass.cooldown - Bypasses the cooldown.
+# beanRTP.reload - Use of the /rtpreload command.
+# beanRTP.others - Use of the /rtp (name) command.
+# beanRTP.bypass.timer - Bypasses the timer.
+# beanRTP.help - Access to the /rtp help command.
 
-# Various Messages
-no-permission: '&cSorry, you do not have permission to execute this command.'
-player-not-found: '&cSorry, player &a%player% &cwas not found.'
-incorrect-syntax-text: '&cUnknown argument &d%argument%&c. A text is required. Description: "&d%help%&c".'
-incorrect-syntax-number: '&cUnknown argument &d%argument%&c. A number is required. Description: "&d%help%&c".'
-incorrect-syntax-player: '&cUnknown argument &d%argument%&c. An online player name is required. Description: "&d%help%&c".'
-incorrect-syntax-world: '&cUnknown argument &d%argument%&c. A world name is required. Description: "&d%help%&c".'
-incorrect-syntax-other: '&cUnknown argument &d%argument%&c. Description: "&d%help%&c".'
-too-many-arguments: '&cSorry, you have too many arguments.'
-not-enough-arguments: '&cSorry, you do not have enough arguments.'
-
-# IMPORTANT - DO NOT TOUCH
-config-version: 1.0.0
+# DO NOT TOUCH THIS
+file-version: 1

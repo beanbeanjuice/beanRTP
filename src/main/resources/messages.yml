@@ -3,21 +3,25 @@ no-permission: '&cYou do not have permission to use this command.'
 starting-teleportation: '&3Teleportation is starting in &a{seconds} &3seconds...'
 successful-teleportation: '&aYou have been successfully teleported!'
 unsuccessful-teleportation: '&cTeleportation was unsuccessful. Please try again.'
+other-successful-teleportation: '&a{player} has been successfully teleported.'
+other-unsuccessful-teleportation: '&cThere was an error teleporting {player}. Please try again.'
+moved-during-teleport: '&cYou moved! Cancelling teleportation.'
 cooldown: '&cSorry, you are on a cooldown for &b{seconds} &cmore seconds.'
 successful-reload: '&aThe plugin has been successfully reloaded.'
 unknown-command: '&cThis is an unknown command. Please type &a/rtp help &cfor more information.'
-spawn-set: '&3Spawn in &a{world} &3been set to &9{x}&3, &9{z}&3.'
 not-allowed-world: '&cSorry, you cannot do that in this world.'
 not-allowed-world-others: '&cSorry, {player} is in a disabled world.'
-unknown-player: '&cThe player &d{player} &cwas not found.'
-help-message: '&aDisplaying help commands...'
 already-teleporting: '&cYou cannot execute this command. You are already teleporting.'
 
 # Help commands
 help:
+  - '&aDisplaying help commands...'
   - '&6/rtp&a: Teleports you to a random location.'
   - '&6/rtp (player)&a: Teleports the selected player to a random location.'
   - '&6/rtp reload&a: Reloads the config file.'
   - '&6/rtp setspawn&a: Sets the spawn location in config. You need this in order for the plugin to work properly.'
   - '&6/rtp help&a: Displays these messages.'
   - '&c&oNote&r&c: If you do not do /rtp setspawn in each world, it will use the default coordinates of X = 0 and Z = 0.'
+
+# DO NOT TOUCH THIS
+file-version: 1
