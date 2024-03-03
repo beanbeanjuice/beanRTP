@@ -32,7 +32,7 @@ Fixes # (issue)
     - CPU: 
     - GPU: 
     - RAM: 
-* JDK: Java OpenJDK 21
+* JDK: Java OpenJDK 17
 
 ---
 
@@ -49,4 +49,4 @@ Fixes # (issue)
 - [ ] New and existing Maven CI tests have passed.
 - [ ] The pull request is properly merging into the correct branch.
 - [ ] All existing local code has been pushed to the GitHub repository.
-- [ ] Changes have been documented in the current draft [BuyAmmo Releases](https://github.com/beanbeanjuice/beanRTP/releases) update.
+- [ ] Changes have been documented in the current draft [beanRTP Releases](https://github.com/beanbeanjuice/beanRTP/releases) update.
