@@ -1,12 +1,15 @@
-name: BeanRTP
-version: ${project.version}
-main: beanbeanjuice.beanrtp.BeanRTP
-api-version: 1.16
-load: STARTUP
+name: beanRTP
+version: '${project.version}'
+main: com.beanbeanjuice.beanrtp.BeanRTP
+api-version: '1.20'
+prefix: beanRTP
+softdepend: []
 authors: [beanbeanjuice]
-description: Teleport you to a random, safe, location.
+description: A random teleport plugin for Minecraft!
+website: https://www.github.com/beanbeanjuice/beanRTP
+load: POSTWORLD
 
 commands:
   rtp:
-    aliases: [randomtp]
-    description: This randomly teleports you. You can also use /rtp (name).
+    aliases: [randomtp, randomteleport]
+    description: Randomly teleports you. You can also use /rtp (name).
