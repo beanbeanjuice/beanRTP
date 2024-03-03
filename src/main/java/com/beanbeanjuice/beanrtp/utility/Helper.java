@@ -1,50 +1,33 @@
 package com.beanbeanjuice.beanrtp.utility;
 
 import com.beanbeanjuice.beanrtp.BeanRTP;
-import com.beanbeanjuice.beanrtp.config.Messages;
+import com.beanbeanjuice.beanrtp.utility.config.ConfigDataKey;
+import lombok.Getter;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import org.jetbrains.annotations.NotNull;
 
 public class Helper {
 
-    private static String prefix;
-    private static BeanRTP plugin;
+    @Getter private static BeanRTP plugin;
 
     public static void initialize(BeanRTP beanRTP) {
         plugin = beanRTP;
-        prefix = translateColors(plugin.getConfig().getString("prefix"));
     }
 
-    @NotNull
-    public static String translateColors(@NotNull String string) {
-        return string.replaceAll("&", "§");
+    public static String translateColors(String string) {
+        return ChatColor.translateAlternateColorCodes('&', string);
     }
 
-
-    @NotNull
-    public static BeanRTP getPlugin() {
-        return plugin;
+    public static void sendNoPermission(CommandSender sender) {
+        sendMessage(sender, (String) plugin.getMessageConfig().get(ConfigDataKey.NO_PERMISSION_MESSAGE));
     }
 
-    @NotNull
-    public static String getMessageConfig(@NotNull String string) {
-        return translateColors(Messages.getConfig().getString(string));
+    public static void sendUnknownCommand(CommandSender sender) {
+        sendMessage(sender, (String) plugin.getMessageConfig().get(ConfigDataKey.UNKNOWN_COMMAND_MESSAGE));
     }
 
-    public static String getPrefix() {
-        return prefix;
-    }
-
-    public static void sendNoPermission(@NotNull CommandSender sender) {
-        sendMessage(sender, getMessageConfig("no-permission"));
-    }
-
-    public static void sendUnknownCommand(@NotNull CommandSender sender) {
-        sendMessage(sender, getMessageConfig("unknown-command"));
-    }
-
-    public static void sendMessage(@NotNull CommandSender sender, @NotNull String message) {
-        sender.sendMessage(getPrefix() + translateColors(message));
+    public static void sendMessage(CommandSender sender, String message) {
+        sender.sendMessage(plugin.getPluginConfig().get(ConfigDataKey.PREFIX) + message);
     }
 
 }

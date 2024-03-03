@@ -1,6 +1,7 @@
 package com.beanbeanjuice.beanrtp.utility.countdown;
 
 import com.beanbeanjuice.beanrtp.BeanRTP;
+import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -10,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CountdownTimer {
 
-    private int countdownTime;
+    @Setter private int countdownTime;
     private final Player player;
     private final Location initialLocation;
     private final CountdownDisplay display;
@@ -30,21 +31,20 @@ public class CountdownTimer {
         isRunning = false;
     }
 
-    public void setCountdownTime(int time) {
-        this.countdownTime = time;
-    }
-
     public void start(BeanRTP plugin) {
         isRunning = true;
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             try {
+                long startTime = System.currentTimeMillis();
 
-                while (hasNotMoved() && countdownTime > 0) {
-                    display.run(countdownTime);
-                    Thread.sleep(TimeUnit.SECONDS.toMillis(1));
+                while (hasNotMoved() && countdownTime >= 0) {
+                    if (System.currentTimeMillis() - startTime > TimeUnit.SECONDS.toMillis(1)) {
+                        display.run(countdownTime);
+                        countdownTime--;
+                        startTime = System.currentTimeMillis();
+                    }
 
-                    countdownTime--;
                 }
 
                 isRunning = false;

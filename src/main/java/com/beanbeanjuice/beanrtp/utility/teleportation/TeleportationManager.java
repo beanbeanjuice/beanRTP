@@ -2,16 +2,16 @@ package com.beanbeanjuice.beanrtp.utility.teleportation;
 
 import com.beanbeanjuice.beanrtp.BeanRTP;
 import com.beanbeanjuice.beanrtp.utility.Helper;
+import com.beanbeanjuice.beanrtp.utility.config.ConfigDataKey;
 import com.beanbeanjuice.beanrtp.utility.cooldown.CooldownManager;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent;
-import org.jetbrains.annotations.NotNull;
 
-import java.sql.Time;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -21,9 +21,9 @@ public class TeleportationManager {
 
     private static BeanRTP plugin;
     private static TeleportationSettings settings;
-    private static CooldownManager cooldownManager;
+    @Getter private static CooldownManager cooldownManager;
 
-    private static final int MAX_LOCATIONS_PER_PLAYER = 5;
+    private static final int MAX_LOCATIONS_PER_PLAYER = 3;
     private static final int MIN_LOCATIONS_PER_PLAYER = 2;
 
     private static final Material[] unsafeMaterials = new Material[] {
@@ -59,15 +59,15 @@ public class TeleportationManager {
             Material.TALL_GRASS
     };
 
-    private static Hashtable<World, Vector<Location>> safeLocations = new Hashtable<>();
+    private static final Hashtable<World, Vector<Location>> safeLocations = new Hashtable<>();
 
     private TeleportationManager() { }
 
-    public static void initialize(@NotNull BeanRTP beanRTP) {
+    public static void initialize(BeanRTP beanRTP) {
         plugin = beanRTP;
-        settings = new TeleportationSettings(plugin);
+        settings = new TeleportationSettings();
 
-        cooldownManager = new CooldownManager(plugin.getConfig().getInt("cooldown-time"));
+        cooldownManager = new CooldownManager((Integer) Helper.getPlugin().getPluginConfig().get(ConfigDataKey.COOLDOWN_TIME));
 
         plugin.getLogger().log(Level.INFO, "Populating RTP locations...");
         populateLocations(settings.getAllowedWorlds());
@@ -251,10 +251,6 @@ public class TeleportationManager {
 
     public static boolean inAllowedWorld(Player player) {
         return safeLocations.containsKey(player.getWorld());
-    }
-
-    public static CooldownManager getCooldownManager() {
-        return cooldownManager;
     }
 
 }

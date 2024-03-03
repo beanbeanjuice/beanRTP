@@ -1,3 +1,6 @@
+# =================================
+#             beanRTP
+# =================================
 prefix: '&8[&bbeanRTP&8] '
 
 # Minimum distance to teleport from the player's current location.
@@ -24,4 +27,4 @@ countdown-time: 10
 # beanRTP.help - Access to the /rtp help command.
 
 # DO NOT TOUCH THIS
-version: 1.0.0
+file-version: 1
