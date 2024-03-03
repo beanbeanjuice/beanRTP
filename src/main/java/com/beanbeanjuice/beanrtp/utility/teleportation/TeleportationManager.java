@@ -1,9 +1,8 @@
 package com.beanbeanjuice.beanrtp.utility.teleportation;
 
 import com.beanbeanjuice.beanrtp.BeanRTP;
-import com.beanbeanjuice.beanrtp.utility.Helper;
-import com.beanbeanjuice.beanrtp.utility.config.ConfigDataKey;
 import com.beanbeanjuice.beanrtp.utility.cooldown.CooldownManager;
+import io.papermc.lib.PaperLib;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -107,11 +106,7 @@ public class TeleportationManager {
         Location location = safeLocations.get(world).remove(0);
 
         // Used to stop console spam of "MOVED TOO QUICKLY"
-        Bukkit.getScheduler().runTaskLater(
-                plugin,
-                () -> player.teleport(location, PlayerTeleportEvent.TeleportCause.PLUGIN),
-                1
-        );
+        PaperLib.teleportAsync(player, location, PlayerTeleportEvent.TeleportCause.PLUGIN);
 
         if (safeLocations.get(world).size() <= getMinLocationsCount())
             populateLocations(settings.getAllowedWorlds());
