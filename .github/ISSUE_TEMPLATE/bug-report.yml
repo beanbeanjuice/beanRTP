@@ -17,22 +17,22 @@ body:
     attributes:
       label: Version
       description: What version of the plugin are you using?
-      placeholder: 0.1.0
+      placeholder: 3.0.0
     validations:
       required: true
   - type: dropdown
     attributes:
-      label: What proxy software are you seeing this issue on?
+      label: What server software are you seeing this issue on?
       multiple: true
       options:
-        - BungeeCord
-        - Waterfall
-        - Velocity
+        - Bukkit
+        - Spigot
+        - Paper
     validations:
       required: true
   - type: textarea
     attributes:
-      label: What proxy software version are you using?
+      label: What server software version are you using?
       placeholder: "1.20"
     validations:
       required: true
