@@ -2,7 +2,7 @@
   <img src="https://github.com/beanbeanjuice/beanRTP/blob/master/Images/Finished/beanRTP.png?raw=true" alt="beanRTP Logo"/>
 </p>
 <center>
-  A simple plugin to allow random teleportation on your server. It always sends players to a safe location. It also caches safe locations, so there there is no lag when teleporting players!
+  A simple plugin to allow random teleportation on your server. It always sends players to a safe location. It also caches safe locations, so there is no lag when teleporting players!
 </center>
 
 ---
