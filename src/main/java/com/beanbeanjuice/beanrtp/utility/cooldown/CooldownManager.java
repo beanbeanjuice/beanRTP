@@ -1,5 +1,7 @@
 package com.beanbeanjuice.beanrtp.utility.cooldown;
 
+import com.beanbeanjuice.beanrtp.utility.Helper;
+import com.beanbeanjuice.beanrtp.utility.config.ConfigDataKey;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -9,11 +11,9 @@ import java.util.concurrent.TimeUnit;
 public class CooldownManager {
 
     private final HashMap<UUID, Long> cooldowns;
-    private final int cooldownInSeconds;
 
-    public CooldownManager(int cooldownInSeconds) {
+    public CooldownManager() {
         this.cooldowns = new HashMap<>();
-        this.cooldownInSeconds = cooldownInSeconds;
     }
 
     public void addCooldown(Player player) {
@@ -27,7 +27,7 @@ public class CooldownManager {
         long elapsedTimeInMilliseconds = System.currentTimeMillis() - cooldowns.get(uuid);
         long elapsedTimeInSeconds = TimeUnit.MILLISECONDS.toSeconds(elapsedTimeInMilliseconds);
 
-        long timeLeft = cooldownInSeconds - elapsedTimeInSeconds;
+        long timeLeft = (Integer) Helper.getPlugin().getPluginConfig().get(ConfigDataKey.COOLDOWN_TIME) - elapsedTimeInSeconds;
         if (timeLeft < 0) return 0;
 
         return (int) timeLeft;

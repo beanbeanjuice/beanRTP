@@ -67,7 +67,7 @@ public class TeleportationManager {
         plugin = beanRTP;
         settings = new TeleportationSettings();
 
-        cooldownManager = new CooldownManager((Integer) Helper.getPlugin().getPluginConfig().get(ConfigDataKey.COOLDOWN_TIME));
+        cooldownManager = new CooldownManager();
 
         plugin.getLogger().log(Level.INFO, "Populating RTP locations...");
         populateLocations(settings.getAllowedWorlds());
