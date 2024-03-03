@@ -8,6 +8,7 @@ import com.beanbeanjuice.beanrtp.utility.config.MessageConfig;
 import com.beanbeanjuice.beanrtp.utility.config.PluginConfig;
 import com.beanbeanjuice.beanrtp.utility.teleportation.TeleportationManager;
 import lombok.Getter;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -29,6 +30,10 @@ public final class BeanRTP extends JavaPlugin {
         TeleportationManager.initialize(this);
         initializeCommands();
 
+        int pluginId = 21207;
+        Metrics metrics = new Metrics(this, pluginId);
+        getLogger().info("bStats logging has been enabled.");
+
         getLogger().info("The plugin has been enabled.");
     }
 
@@ -40,7 +45,7 @@ public final class BeanRTP extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        Bukkit.getScheduler().cancelTasks(this);  // TODO
+        Bukkit.getScheduler().cancelTasks(this);
         getLogger().info("The plugin has been disabled.");
     }
 
