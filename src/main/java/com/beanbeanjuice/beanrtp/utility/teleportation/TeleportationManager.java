@@ -102,6 +102,9 @@ public class TeleportationManager {
     public static boolean teleport(Player player) {
         World world = player.getWorld();
 
+        if (!isAllowedWorld(world)) // -> The world the player is trying to teleport from, is not allowed
+            world = settings.getFallbackWorld(); // Change the world to the fallback configured one
+
         if (safeLocations.get(world).isEmpty()) return false;
 
         Location location = safeLocations.get(world).remove(0);
@@ -245,8 +248,12 @@ public class TeleportationManager {
         return onlinePlayers * MAX_LOCATIONS_PER_PLAYER;
     }
 
+    public static boolean isAllowedWorld(World world) {
+        return safeLocations.containsKey(world);
+    }
+
     public static boolean inAllowedWorld(Player player) {
-        return safeLocations.containsKey(player.getWorld());
+        return isAllowedWorld(player.getWorld());
     }
 
 }

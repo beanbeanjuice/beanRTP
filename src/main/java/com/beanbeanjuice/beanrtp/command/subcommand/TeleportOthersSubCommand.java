@@ -14,10 +14,10 @@ public class TeleportOthersSubCommand implements ISubCommand {
     @Override
     public boolean handle(CommandSender sender, String[] args) {
         Player player = Bukkit.getPlayer(args[0]);
-
+        Config pluginConfig = Helper.getPlugin().getPluginConfig();
         Config messageConfig = Helper.getPlugin().getMessageConfig();
 
-        if (!TeleportationManager.inAllowedWorld(player)) {
+        if (!TeleportationManager.inAllowedWorld(player) && ((String) pluginConfig.get(ConfigDataKey.FALLBACK_WORLD)).isBlank()) {
             Helper.sendMessage(sender, (String) messageConfig.get(ConfigDataKey.NOT_ALLOWED_WORLD_OTHERS_MESSAGE));
             return false;
         }
