@@ -25,6 +25,7 @@
 * **Safe Locations**
 * **Customizable Messages**
 * **Smart Cooldown System**
+* **Fallback World**
 
 ---
 
@@ -60,6 +61,10 @@ allowed-worlds:
   - world
   - world_nether
   - world_the_end
+
+# Fallback world. When set to a world name, any player that tries to RTP into a forbidden world, RTP's into this one.
+# Example: Player in the world 'spawn' types /rtp, but that world is not on the allowed-worlds list, so they get RTP'd to the fallback world.
+fallback-world: ''
 
 # Cooldown in seconds.
 cooldown-time: 300
