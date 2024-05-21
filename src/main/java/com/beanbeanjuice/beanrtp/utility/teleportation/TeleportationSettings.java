@@ -4,6 +4,7 @@ import com.beanbeanjuice.beanrtp.utility.Helper;
 import com.beanbeanjuice.beanrtp.utility.config.Config;
 import com.beanbeanjuice.beanrtp.utility.config.ConfigDataKey;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
@@ -16,6 +17,7 @@ public class TeleportationSettings {
 
     private final int minimumDistanceFromBorderCenter;
     private final String[] allowedWorlds;
+    private final World fallbackWorld;
     private final int cooldownTime;
     private final int countdownTime;
 
@@ -24,6 +26,7 @@ public class TeleportationSettings {
         minimumDistanceFromBorderCenter = (Integer) config.get(ConfigDataKey.MINIMUM_DISTANCE_FROM_BORDER_CENTER);
 
         allowedWorlds = ((List<String>) config.get(ConfigDataKey.ALLOWED_WORLDS)).toArray(new String[0]);
+        fallbackWorld = Bukkit.getWorld((String) config.get(ConfigDataKey.FALLBACK_WORLD));
 
         cooldownTime = (Integer) config.get(ConfigDataKey.COOLDOWN_TIME);
         countdownTime = (Integer) config.get(ConfigDataKey.COUNTDOWN_TIME);
