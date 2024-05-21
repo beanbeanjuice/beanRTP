@@ -42,7 +42,7 @@ public class TeleportSelfSubCommand implements ISubCommand {
         Config pluginConfig = Helper.getPlugin().getPluginConfig();
         String prefix = (String) pluginConfig.get(ConfigDataKey.PREFIX);
 
-        if (!TeleportationManager.inAllowedWorld(player)) {
+        if (!TeleportationManager.inAllowedWorld(player) && ((String) pluginConfig.get(ConfigDataKey.FALLBACK_WORLD)).isBlank()) {
             Helper.sendMessage(player, (String) messageConfig.get(ConfigDataKey.NOT_ALLOWED_WORLD_MESSAGE));
             return false;
         }
