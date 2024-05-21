@@ -40,25 +40,25 @@ public class TeleportSelfSubCommand implements ISubCommand {
     private boolean handlePlayer(Player player) {
         Config messageConfig = Helper.getPlugin().getMessageConfig();
         Config pluginConfig = Helper.getPlugin().getPluginConfig();
-        String prefix = (String) pluginConfig.get(ConfigDataKey.PREFIX);
+        String prefix = pluginConfig.getAsString(ConfigDataKey.PREFIX);
 
-        if (!TeleportationManager.inAllowedWorld(player) && ((String) pluginConfig.get(ConfigDataKey.FALLBACK_WORLD)).isBlank()) {
-            Helper.sendMessage(player, (String) messageConfig.get(ConfigDataKey.NOT_ALLOWED_WORLD_MESSAGE));
+        if (!TeleportationManager.inAllowedWorld(player) && (pluginConfig.getAsString(ConfigDataKey.FALLBACK_WORLD)).isBlank()) {
+            Helper.sendMessage(player, messageConfig.getAsString(ConfigDataKey.NOT_ALLOWED_WORLD_MESSAGE));
             return false;
         }
 
         if (!canBypassCooldown(player) && TeleportationManager.getCooldownManager().isInCooldown(player)) {
             int secondsLeft = TeleportationManager.getCooldownManager().getCooldownInSeconds(player);
-            Helper.sendMessage(player, ((String) messageConfig.get(ConfigDataKey.COOLDOWN_MESSAGE)).replace("{seconds}",
+            Helper.sendMessage(player, (messageConfig.getAsString(ConfigDataKey.COOLDOWN_MESSAGE)).replace("{seconds}",
                     String.valueOf(secondsLeft)));
             return false;
         }
 
-        int countdownTime = (Integer) pluginConfig.get(ConfigDataKey.COUNTDOWN_TIME);
+        int countdownTime = pluginConfig.getAsInt(ConfigDataKey.COUNTDOWN_TIME);
 
         CountdownDisplay displayFunction = (timeLeft) -> {
             player.sendTitle(prefix,
-                    ((String) messageConfig.get(ConfigDataKey.STARTING_TELEPORTATION_MESSAGE)).replace("{seconds}", Integer.toString(timeLeft)),
+                    (messageConfig.getAsString(ConfigDataKey.STARTING_TELEPORTATION_MESSAGE)).replace("{seconds}", Integer.toString(timeLeft)),
                     0, 20, 20);
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 10, 1);
         };
@@ -67,13 +67,13 @@ public class TeleportSelfSubCommand implements ISubCommand {
             if (TeleportationManager.teleport(player)) {
                 applyEffects(player);
                 TeleportationManager.getCooldownManager().addCooldown(player);
-                player.sendTitle(prefix, (String) messageConfig.get(ConfigDataKey.SUCCESSFUL_TELEPORTATION_MESSAGE), 0, 20, 20);
+                player.sendTitle(prefix, messageConfig.getAsString(ConfigDataKey.SUCCESSFUL_TELEPORTATION_MESSAGE), 0, 20, 20);
             }
             return null;
         };
 
         Callable<Void> failedFunction = () -> {
-            player.sendTitle(prefix, (String) messageConfig.get(ConfigDataKey.MOVED_DURING_TELEPORT_MESSAGE), 0, 20, 20);
+            player.sendTitle(prefix, messageConfig.getAsString(ConfigDataKey.MOVED_DURING_TELEPORT_MESSAGE), 0, 20, 20);
             player.playSound(player.getLocation(), Sound.ENTITY_GHAST_DEATH, 10, 1);
             return null;
         };
@@ -84,7 +84,7 @@ public class TeleportSelfSubCommand implements ISubCommand {
         );
 
         if (CountdownManager.isCounting(player)) {
-            Helper.sendMessage(player, (String) messageConfig.get(ConfigDataKey.ALREADY_TELEPORTING_MESSAGE));
+            Helper.sendMessage(player, messageConfig.getAsString(ConfigDataKey.ALREADY_TELEPORTING_MESSAGE));
             return false;
         }
 
@@ -106,7 +106,7 @@ public class TeleportSelfSubCommand implements ISubCommand {
             player.removePotionEffect(PotionEffectType.SLOW_FALLING);
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 300, 0));
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 40, 10));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 40, 10));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 40, 10));
         }, 2);
     }
 

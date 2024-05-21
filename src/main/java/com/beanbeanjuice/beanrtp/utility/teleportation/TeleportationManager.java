@@ -1,6 +1,7 @@
 package com.beanbeanjuice.beanrtp.utility.teleportation;
 
 import com.beanbeanjuice.beanrtp.BeanRTP;
+import com.beanbeanjuice.beanrtp.utility.config.ConfigDataKey;
 import com.beanbeanjuice.beanrtp.utility.cooldown.CooldownManager;
 import io.papermc.lib.PaperLib;
 import lombok.Getter;
@@ -65,16 +66,16 @@ public class TeleportationManager {
 
     public static void initialize(BeanRTP beanRTP) {
         plugin = beanRTP;
-        settings = new TeleportationSettings();
+        settings = new TeleportationSettings(beanRTP.getPluginConfig());
 
         cooldownManager = new CooldownManager();
 
         plugin.getLogger().log(Level.INFO, "Populating RTP locations...");
-        populateLocations(settings.getAllowedWorlds());
+        populateLocations();
     }
 
-    private static void populateLocations(String[] allowedWorlds) {
-        Stream<World> worlds = Arrays.stream(allowedWorlds).map(Bukkit::getWorld);
+    public static void populateLocations() {
+        Stream<World> worlds = Arrays.stream(settings.getAllowedWorlds()).map(Bukkit::getWorld);
 
         // Using a vector to remain thread safe.
         worlds.forEach((world) -> safeLocations.putIfAbsent(world, new Vector<>()));
@@ -110,10 +111,19 @@ public class TeleportationManager {
         Location location = safeLocations.get(world).remove(0);
 
         // Used to stop console spam of "MOVED TOO QUICKLY"
-        PaperLib.teleportAsync(player, location, PlayerTeleportEvent.TeleportCause.PLUGIN);
+        // TODO: Temporary fix.
+        if (PaperLib.isPaper()) {
+            PaperLib.teleportAsync(player, location, PlayerTeleportEvent.TeleportCause.PLUGIN);
+        } else {
+            Bukkit.getScheduler().scheduleSyncDelayedTask(
+                    plugin,
+                    () -> player.teleport(location, PlayerTeleportEvent.TeleportCause.PLUGIN),
+                    1
+            );
+        }
 
         if (safeLocations.get(world).size() <= getMinLocationsCount())
-            populateLocations(settings.getAllowedWorlds());
+            populateLocations();
 
         return true;
     }
@@ -249,7 +259,11 @@ public class TeleportationManager {
     }
 
     public static boolean isAllowedWorld(World world) {
-        return safeLocations.containsKey(world);
+        String worldNameCheck = world.getName();
+
+        for (String worldName : settings.getAllowedWorlds())
+            if (worldName.equalsIgnoreCase(worldNameCheck)) return true;
+        return false;
     }
 
     public static boolean inAllowedWorld(Player player) {
