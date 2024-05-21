@@ -1,7 +1,6 @@
 package com.beanbeanjuice.beanrtp.utility.teleportation;
 
 import com.beanbeanjuice.beanrtp.BeanRTP;
-import com.beanbeanjuice.beanrtp.utility.config.ConfigDataKey;
 import com.beanbeanjuice.beanrtp.utility.cooldown.CooldownManager;
 import io.papermc.lib.PaperLib;
 import lombok.Getter;
