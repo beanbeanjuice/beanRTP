@@ -3,6 +3,7 @@ package com.beanbeanjuice.beanrtp.command.subcommand;
 import com.beanbeanjuice.beanrtp.utility.Helper;
 import com.beanbeanjuice.beanrtp.utility.ISubCommand;
 import com.beanbeanjuice.beanrtp.utility.config.ConfigDataKey;
+import com.beanbeanjuice.beanrtp.utility.teleportation.TeleportationManager;
 import org.bukkit.command.CommandSender;
 
 public class ReloadSubCommand implements ISubCommand {
@@ -17,7 +18,9 @@ public class ReloadSubCommand implements ISubCommand {
         Helper.getPlugin().getPluginConfig().initialize();
         Helper.getPlugin().getMessageConfig().initialize();
 
-        Helper.sendMessage(sender, (String) Helper.getPlugin().getMessageConfig().get(ConfigDataKey.SUCCESSFUL_RELOAD_MESSAGE));
+        Helper.sendMessage(sender, Helper.getPlugin().getMessageConfig().getAsString(ConfigDataKey.SUCCESSFUL_RELOAD_MESSAGE));
+
+        TeleportationManager.populateLocations();
 
         return true;
     }
