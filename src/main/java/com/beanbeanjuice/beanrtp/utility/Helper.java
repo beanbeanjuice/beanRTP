@@ -19,15 +19,15 @@ public class Helper {
     }
 
     public static void sendNoPermission(CommandSender sender) {
-        sendMessage(sender, (String) plugin.getMessageConfig().get(ConfigDataKey.NO_PERMISSION_MESSAGE));
+        sendMessage(sender, plugin.getMessageConfig().getAsString(ConfigDataKey.NO_PERMISSION_MESSAGE));
     }
 
     public static void sendUnknownCommand(CommandSender sender) {
-        sendMessage(sender, (String) plugin.getMessageConfig().get(ConfigDataKey.UNKNOWN_COMMAND_MESSAGE));
+        sendMessage(sender, plugin.getMessageConfig().getAsString(ConfigDataKey.UNKNOWN_COMMAND_MESSAGE));
     }
 
     public static void sendMessage(CommandSender sender, String message) {
-        sender.sendMessage(plugin.getPluginConfig().get(ConfigDataKey.PREFIX) + message);
+        sender.sendMessage(plugin.getPluginConfig().getAsString(ConfigDataKey.PREFIX) + message);
     }
 
 }

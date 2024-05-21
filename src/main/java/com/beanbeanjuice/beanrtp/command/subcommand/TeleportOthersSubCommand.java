@@ -17,16 +17,16 @@ public class TeleportOthersSubCommand implements ISubCommand {
         Config pluginConfig = Helper.getPlugin().getPluginConfig();
         Config messageConfig = Helper.getPlugin().getMessageConfig();
 
-        if (!TeleportationManager.inAllowedWorld(player) && ((String) pluginConfig.get(ConfigDataKey.FALLBACK_WORLD)).isBlank()) {
-            Helper.sendMessage(sender, (String) messageConfig.get(ConfigDataKey.NOT_ALLOWED_WORLD_OTHERS_MESSAGE));
+        if (!TeleportationManager.inAllowedWorld(player) && (pluginConfig.getAsString(ConfigDataKey.FALLBACK_WORLD)).isBlank()) {
+            Helper.sendMessage(sender, messageConfig.getAsString(ConfigDataKey.NOT_ALLOWED_WORLD_OTHERS_MESSAGE));
             return false;
         }
 
         if (TeleportationManager.teleport(player))
-            Helper.sendMessage(sender, ((String) messageConfig.get(ConfigDataKey.OTHER_SUCCESSFUL_TELEPORTATION_MESSAGE))
+            Helper.sendMessage(sender, (messageConfig.getAsString(ConfigDataKey.OTHER_SUCCESSFUL_TELEPORTATION_MESSAGE))
                     .replace("{player}", player.getName()));
         else
-            Helper.sendMessage(sender, ((String) messageConfig.get(ConfigDataKey.OTHER_UNSUCCESSFUL_TELEPORTATION_MESSAGE))
+            Helper.sendMessage(sender, (messageConfig.getAsString(ConfigDataKey.OTHER_UNSUCCESSFUL_TELEPORTATION_MESSAGE))
                     .replace("{player}", player.getName()));
 
         return true;

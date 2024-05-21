@@ -27,7 +27,7 @@ public class CooldownManager {
         long elapsedTimeInMilliseconds = System.currentTimeMillis() - cooldowns.get(uuid);
         long elapsedTimeInSeconds = TimeUnit.MILLISECONDS.toSeconds(elapsedTimeInMilliseconds);
 
-        long timeLeft = (Integer) Helper.getPlugin().getPluginConfig().get(ConfigDataKey.COOLDOWN_TIME) - elapsedTimeInSeconds;
+        long timeLeft = Helper.getPlugin().getPluginConfig().getAsInt(ConfigDataKey.COOLDOWN_TIME) - elapsedTimeInSeconds;
         if (timeLeft < 0) return 0;
 
         return (int) timeLeft;

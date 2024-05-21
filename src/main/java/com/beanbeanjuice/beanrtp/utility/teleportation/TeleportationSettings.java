@@ -1,35 +1,40 @@
 package com.beanbeanjuice.beanrtp.utility.teleportation;
 
-import com.beanbeanjuice.beanrtp.utility.Helper;
 import com.beanbeanjuice.beanrtp.utility.config.Config;
 import com.beanbeanjuice.beanrtp.utility.config.ConfigDataKey;
-import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
 
 import java.util.AbstractMap;
-import java.util.List;
 
-@Getter
 public class TeleportationSettings {
 
-    private final int minimumDistanceFromBorderCenter;
-    private final String[] allowedWorlds;
-    private final World fallbackWorld;
-    private final int cooldownTime;
-    private final int countdownTime;
+    private final Config config;
 
-    public TeleportationSettings() {
-        Config config = Helper.getPlugin().getPluginConfig();
-        minimumDistanceFromBorderCenter = (Integer) config.get(ConfigDataKey.MINIMUM_DISTANCE_FROM_BORDER_CENTER);
+    public TeleportationSettings(Config config) {
+        this.config = config;
+    }
 
-        allowedWorlds = ((List<String>) config.get(ConfigDataKey.ALLOWED_WORLDS)).toArray(new String[0]);
-        fallbackWorld = Bukkit.getWorld((String) config.get(ConfigDataKey.FALLBACK_WORLD));
+    public int getMinimumDistanceFromBorderCenter() {
+        return config.getAsInt(ConfigDataKey.MINIMUM_DISTANCE_FROM_BORDER_CENTER);
+    }
 
-        cooldownTime = (Integer) config.get(ConfigDataKey.COOLDOWN_TIME);
-        countdownTime = (Integer) config.get(ConfigDataKey.COUNTDOWN_TIME);
+    public String[] getAllowedWorlds() {
+        return config.getAsStringList(ConfigDataKey.ALLOWED_WORLDS).toArray(new String[0]);
+    }
+
+    public World getFallbackWorld() {
+        return Bukkit.getWorld(config.getAsString(ConfigDataKey.FALLBACK_WORLD));
+    }
+
+    public int getCooldownTime() {
+        return config.getAsInt(ConfigDataKey.COOLDOWN_TIME);
+    }
+
+    public int getCountdownTime() {
+        return config.getAsInt(ConfigDataKey.COUNTDOWN_TIME);
     }
 
     public AbstractMap.SimpleEntry<Location, Location> getPoints(World world) {
