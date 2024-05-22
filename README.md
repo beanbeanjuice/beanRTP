@@ -81,7 +81,7 @@ countdown-time: 10
 # beanRTP.help - Access to the /rtp help command.
 
 # DO NOT TOUCH THIS
-file-version: 1
+file-version: 2
 ```
 
 ### messages.yml
