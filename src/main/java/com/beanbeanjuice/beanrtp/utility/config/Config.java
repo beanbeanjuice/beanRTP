@@ -10,6 +10,7 @@ import dev.dejvokep.boostedyaml.settings.updater.UpdaterSettings;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 public abstract class Config {
@@ -34,7 +35,23 @@ public abstract class Config {
         } catch (IOException ignored) { }
     }
 
-    public Object get(ConfigDataKey key) {
+    public String getAsString(ConfigDataKey key) {
+        return (String) get(key);
+    }
+
+    public int getAsInt(ConfigDataKey key) {
+        return (Integer) get(key);
+    }
+
+    public List<String> getAsStringList(ConfigDataKey key) {
+        return (List<String>) get(key);
+    }
+
+    public boolean getAsBoolean(ConfigDataKey key) {
+        return (Boolean) get(key);
+    }
+
+    private Object get(ConfigDataKey key) {
         return config.get(key).data();
     }
 

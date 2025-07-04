@@ -14,6 +14,7 @@ public class PluginConfig extends Config {
         config.put(ConfigDataKey.PREFIX, new ConfigDataEntry(Helper.translateColors(yamlConfig.getString("prefix"))));
         config.put(ConfigDataKey.MINIMUM_DISTANCE_FROM_BORDER_CENTER, new ConfigDataEntry(yamlConfig.getInt("minimum-distance-from-border-center")));
         config.put(ConfigDataKey.ALLOWED_WORLDS, new ConfigDataEntry(yamlConfig.getStringList("allowed-worlds")));
+        config.put(ConfigDataKey.FALLBACK_WORLD, new ConfigDataEntry(yamlConfig.getString("fallback-world")));
         config.put(ConfigDataKey.COOLDOWN_TIME, new ConfigDataEntry(yamlConfig.getInt("cooldown-time")));
         config.put(ConfigDataKey.COUNTDOWN_TIME, new ConfigDataEntry(yamlConfig.getInt("countdown-time")));
     }
